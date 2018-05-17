@@ -5,10 +5,10 @@ add /version api for server
 ```
 // for toa koa2 express
 var pkg = require('../package')
-var versionMw = require('version')(pkg)
+var versionMw = require('node-version-api')(pkg)
 app.use(versionMw)
 // for koa1
-var versionMw = require('version').koa1(pkg)
+var versionMw = require('node-version-api').koa1(pkg)
 app.use(versionMw)
 ```
 
