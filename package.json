@@ -1,0 +1,28 @@
+{
+  "name": "version",
+  "version": "1.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "yarn add koa && mocha test/index.js --exit && yarn add koa@1.6.0 && mocha test/koa1test.js --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@code.teambition.com:account/version.git"
+  },
+  "keywords": [
+    "version"
+  ],
+  "author": "lee715",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "express": "^4.16.3",
+    "koa": "1.6.0",
+    "koa-router": "^7.4.0",
+    "mocha": "^5.1.1",
+    "supertest": "^3.1.0",
+    "toa": "^3.2.2",
+    "toa-router": "^2.1.3"
+  }
+}
