@@ -1,3 +1,4 @@
+var path = require('path')
 var versionReg = /^\/version$/
 
 module.exports = function (pkg) {
@@ -52,12 +53,23 @@ module.exports.koa1 = function (pkg) {
 }
 
 function getVersion (pkg) {
-  const version = {
+  var version = {
     name: pkg.name,
     version: pkg.version,
     startTime: Date.now()
   }
-  if (process.env.BUILD_TIME) version.buildTime = process.env.BUILD_TIME
-  if (process.env.BUILD_COMMIT) version.buildCommit = process.env.BUILD_COMMIT
+  try {
+    var verJson = require(path.resolve(getRoot(), './version.json'))
+    if (verJson.TIME) version.buildTime = verJson.TIME
+    if (verJson.COMMIT) version.buildCommit = verJson.COMMIT
+  } catch (e) {}
+  if (!version.buildTime && process.env.BUILD_TIME) version.buildTime = process.env.BUILD_TIME
+  if (!version.buildCommit && process.env.BUILD_COMMIT) version.buildCommit = process.env.BUILD_COMMIT
   return version
+}
+
+function getRoot () {
+  var nodeModuleIndex = __dirname.indexOf('/node_modules')
+  if (nodeModuleIndex === -1) return path.resolve(__dirname, './')
+  return __dirname.slice(0, nodeModuleIndex)
 }

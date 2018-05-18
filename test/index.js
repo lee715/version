@@ -10,6 +10,7 @@ const toa = require('./toa')
 const reqToa = supertest(toa.server)
 const express = require('./express')
 const reqExpress = supertest(express)
+const ver = require('../version')
 
 describe('koa2', () => {
   it('/', async () => {
@@ -23,6 +24,8 @@ describe('koa2', () => {
       .expect(200)
     assert.strictEqual(rt.body.version, pkg.version)
     assert.strictEqual(rt.body.name, pkg.name)
+    assert.strictEqual(rt.body.buildTime, ver.TIME)
+    assert.strictEqual(rt.body.buildCommit, ver.COMMIT)
   })
 
   it('/version/test', async () => {
@@ -44,6 +47,8 @@ describe('toa', () => {
       .expect(200)
     assert.strictEqual(rt.body.version, pkg.version)
     assert.strictEqual(rt.body.name, pkg.name)
+    assert.strictEqual(rt.body.buildTime, ver.TIME)
+    assert.strictEqual(rt.body.buildCommit, ver.COMMIT)
   })
 
   it('/version/test', async () => {
@@ -65,6 +70,8 @@ describe('express', () => {
       .expect(200)
     assert.strictEqual(rt.body.version, pkg.version)
     assert.strictEqual(rt.body.name, pkg.name)
+    assert.strictEqual(rt.body.buildTime, ver.TIME)
+    assert.strictEqual(rt.body.buildCommit, ver.COMMIT)
   })
 
   it('/version/test', async () => {

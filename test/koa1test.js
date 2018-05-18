@@ -3,7 +3,7 @@ const supertest = require('supertest')
 const assert = require('assert')
 
 const pkg = require('../package')
-
+const ver = require('../version')
 const koaServer = require('./koa1')
 const reqKoa = supertest(koaServer)
 
@@ -19,6 +19,8 @@ describe('koa1', () => {
       .expect(200)
     assert.strictEqual(rt.body.version, pkg.version)
     assert.strictEqual(rt.body.name, pkg.name)
+    assert.strictEqual(rt.body.buildTime, ver.TIME)
+    assert.strictEqual(rt.body.buildCommit, ver.COMMIT)
   })
 
   it('/version/test', async () => {
